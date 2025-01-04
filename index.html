@@ -86,8 +86,79 @@
 		};
 	</script>
 
+	<script src="https://www.youtube.com/iframe_api"></script>
+
 	<!--Jquery dynamic behavior. -->
 	<script type="text/javascript">
+
+		// This is a map of the id of the video to the start time in seconds.
+		var id_to_start_at_map = {
+			"overture_quicklink": 22,
+			"act1_quicklink": 189,
+			"act1_scene1_quicklink": 188,
+			"act1_scene2_quicklink": 494,
+			"act1_scene3_quicklink": 668,
+			"act1_scene4_quicklink": 1013,
+			"act1_scene5_quicklink": 1181,
+			"act1_scene6_quicklink": 1351,
+			"act1_scene7_quicklink": 1563,
+			"act1_scene8_quicklink": 1731,
+			"act1_scene9_quicklink": 1867,
+			"act1_scene10_quicklink": 2107,
+			"act1_scene11_quicklink": 2246,
+			"act1_scene12_quicklink": 2405,
+			"act1_scene13_quicklink": 2552,
+			"act2_quicklink": 4385 + 11,
+			"act2_scene2_quicklink": 4385 + 133,
+			"act2_scene3_quicklink": 4385 + 255,
+			"act2_scene4_quicklink": 4385 + 452,
+			"act2_scene5_quicklink": 4385 + 564,
+			"act2_scene6_quicklink": 4385 + 803,
+			"act2_scene7_quicklink": 4385 + 1221,
+			"act2_scene8_quicklink": 4385 + 1380,
+			"act2_scene9_quicklink": 4385 + 1556,
+			"act2_scene10_quicklink": 4385 + 1821,
+			"act2_scene11_quicklink": 4385 + 1877,
+			"act2_scene12_quicklink": 4385 + 1962,
+			"act2_scene13_quicklink": 4385 + 2319,
+			"act2_scene14_quicklink": 4385 + 2428,
+		};
+
+		$(function () {
+			$(".quicklink").click(
+				function (event) {
+					id = $(this).attr("id");
+					offset = id_to_start_at_map[$(this).attr("id")]
+					console.log("Clicked quicklink: " + id + " with offset: " + offset);
+					setVideoTime(offset);
+				}
+			);
+		})
+
+
+		let player;
+
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player_overture', {
+				height: '423',
+				width: '630',
+				videoId: 'KlROU_TB5Bk',
+				events: {
+					'onReady': onPlayerReady
+				}
+			});
+		}
+
+		function onPlayerReady(event) {
+			console.log('Player is ready');
+		}
+
+		// Function to set the playback time
+		function setVideoTime(seconds) {
+			if (player && player.seekTo) {
+				player.seekTo(seconds, true); // 'true' ensures it plays immediately after seeking
+			}
+		}
 		$(
 			function () {
 				// Program links.
@@ -163,231 +234,6 @@
 						$('#production').fadeIn('560');
 					}
 				);
-
-				// Quicklinks.
-				$("#overture_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_overture').show();
-					}
-				);
-
-				$("#act1_scene1_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene1').show();
-					}
-				);
-
-
-				$("#act1_scene2_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene2').show();
-					}
-				);
-
-
-				$("#act1_scene3_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene3').show();
-					}
-				);
-
-
-				$("#act1_scene4_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene4').show();
-					}
-				);
-
-
-				$("#act1_scene5_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene5').show();
-					}
-				);
-
-
-				$("#act1_scene6_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene6').show();
-					}
-				);
-
-
-				$("#act1_scene7_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene7').show();
-					}
-				);
-
-
-				$("#act1_scene8_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene8').show();
-					}
-				);
-
-
-				$("#act1_scene9_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene9').show();
-					}
-				);
-
-
-				$("#act1_scene10_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene10').show();
-					}
-				);
-
-
-				$("#act1_scene11_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene11').show();
-					}
-				);
-
-
-				$("#act1_scene12_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene12').show();
-					}
-				);
-
-
-				$("#act1_scene13_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act1_scene13').show();
-					}
-				);
-
-
-
-				$("#act2_scene1_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene1').show();
-					}
-				);
-
-
-				$("#act2_scene2_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene2').show();
-					}
-				);
-
-
-				$("#act2_scene3_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene3').show();
-					}
-				);
-
-
-				$("#act2_scene4_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene4').show();
-					}
-				);
-
-
-				$("#act2_scene5_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene5').show();
-					}
-				);
-
-
-				$("#act2_scene6_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene6').show();
-					}
-				);
-
-
-				$("#act2_scene7_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene7').show();
-					}
-				);
-
-
-				$("#act2_scene8_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene8').show();
-					}
-				);
-
-
-				$("#act2_scene9_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene9').show();
-					}
-				);
-
-
-				$("#act2_scene10_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene10').show();
-					}
-				);
-
-
-				$("#act2_scene11_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene11').show();
-					}
-				);
-
-
-				$("#act2_scene12_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene12').show();
-					}
-				);
-
-
-				$("#act2_scene13_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene13').show();
-					}
-				);
-
-
-				$("#act2_scene14_quicklink").click(
-					function (event) {
-						$('.videobox').hide();
-						$('#player_act2_scene14').show();
-					}
-				);
-
 
 				$('.libretto').hover(
 					function (event) {
@@ -528,10 +374,10 @@
 		}
 
 		.programtextbox {
-			height: 16em;
+			height: 125em;
 			overflow: auto;
 			color: #000000;
-			font-size: 1.4em;
+			font-size: 1em;
 		}
 
 		.programtextbox:hover,
@@ -682,18 +528,8 @@
 		</div>
 		<div id="videos">
 			<div class="grid_10 videobox" id="player_overture" style="">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/first_act.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=23">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/first_act.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=23"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
+				<!-- <iframe width="590" height="423" src="https://www.youtube.com/embed/KlROU_TB5Bk?autoplay=1&start=2"
+					frameborder="0" allowfullscreen></iframe> -->
 			</div>
 
 			<div class="grid_10 videobox" id="player_act2" style="display:none;">
@@ -712,454 +548,6 @@
 				<p></p>
 			</div>
 
-			<div class="grid_10 videobox" id="player_act1" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/first_act.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=189">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/first_act.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=189"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene1" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=188">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=188"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene2" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=494">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=494"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene3" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=668">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=668"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene4" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1013">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1013"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene5" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1181">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1181"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene6" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1351">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1351"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene7" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1563">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1563"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene8" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1731">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1731"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene9" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1867">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1867"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene10" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2107">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2107"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene11" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2246">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2246"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene12" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2405">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2405"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act1_scene13" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2552">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/hiresfinal.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2552"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-
-
-			<div class="grid_10 videobox" id="player_act2_scene1" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=11">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=11"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene2" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=133">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=133"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene3" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=255">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=255"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene4" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=452">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=452"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene5" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=564">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=564"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene6" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=803">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=803"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene7" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1221">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1221"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene8" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1380">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1380"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene9" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1556">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1556"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene10" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1821">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1821"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene11" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1877">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1877"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene12" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1962">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=1962"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene13" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2319">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2319"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
-
-
-			<div class="grid_10 videobox" id="player_act2_scene14" style="display:none;">
-				<object width="590px" height="423px">
-					<param name="movie" value="/FLVScrubber.swf">
-					<param name="bgcolor" value="#000000">
-					<param name="allowScriptAccess" value="always">
-					<param name="allowFullScreen" value="true">
-					<param name="flashVars"
-						value="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2428">
-					<embed src="/FLVScrubber.swf" bgcolor="#000000" width="590px" height="423px" name="FLVScrubber"
-						allowscriptaccess="always" allowfullscreen="true"
-						flashvars="file=http://holyghoststheopera.com/stream/second_act_complete_v5_indexed.flv&amp;previewImage=/media/fastforward.jpg&amp;autostart&amp;credit=Designed by Carl Hu.&amp;startAt=2428"
-						type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-				</object>
-			</div>
 
 
 
